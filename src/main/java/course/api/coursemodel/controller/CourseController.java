@@ -1,14 +1,14 @@
-package java.spring.coursemodel.controller;
+package course.api.coursemodel.controller;
 
+import course.api.coursemodel.service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.spring.coursemodel.service.CourseService;
 
 @RestController
 @RequestMapping("/api/courses")
 public class CourseController
 {
-
+    @Autowired
     private CourseService courseService;
 
     @GetMapping
@@ -18,19 +18,19 @@ public class CourseController
     }
 
     @GetMapping("/{id}")
-    public String getCourse(Integer id)
+    public String getCourse(@PathVariable Integer id)
     {
-        return "abc";
+        return courseService.getCourse(id);
     }
 
     @PostMapping
     public String createCourse(String course)
     {
-        return "course added successfully";
+        return courseService.addCourse(course);
     }
 
     @DeleteMapping
-    public String deleteCourse(String courseNumber)
+    public String deleteCourse(Integer courseNumber)
     {
         return "course added successfully";
     }
