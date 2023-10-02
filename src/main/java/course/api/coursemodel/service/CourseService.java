@@ -1,5 +1,6 @@
 package course.api.coursemodel.service;
 
+import course.api.coursemodel.model.Course;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.Map;
 @Service
 public class CourseService
 {
-    Map<Integer, String> courses = new HashMap<>();
+    Map<Integer, Course> courses = new HashMap<>();
     Integer INCREMENTER = 0;
 
     public String getAllCourses()
@@ -16,12 +17,12 @@ public class CourseService
         return courses.toString();
     }
 
-    public String getCourse(Integer id)
+    public Course getCourse(Integer id)
     {
         return courses.get(id);
     }
 
-    public String addCourse(String name)
+    public String addCourse(Course name)
     {
         if (courses.containsValue(name))
         {
@@ -32,14 +33,15 @@ public class CourseService
         return "Entry added successfully";
     }
 
-    public String deleteCourse(String name)
+    public String deleteCourse(Integer id)
     {
-        if (courses.containsValue(name))
+        if (!courses.containsKey(id))
         {
-            return "Course already present";
+            return "Course is not present";
         }
 
-        return "couse not present";
+        courses.remove(id);
+        return "course removed successfully";
     }
 
 }

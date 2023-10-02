@@ -1,5 +1,6 @@
 package course.api.coursemodel.controller;
 
+import course.api.coursemodel.model.Course;
 import course.api.coursemodel.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +19,21 @@ public class CourseController
     }
 
     @GetMapping("/{id}")
-    public String getCourse(@PathVariable Integer id)
+    public Course getCourse(@PathVariable Integer id)
     {
         return courseService.getCourse(id);
     }
 
     @PostMapping
-    public String createCourse(String course)
+    public String createCourse(Course course)
     {
         return courseService.addCourse(course);
     }
 
     @DeleteMapping
-    public String deleteCourse(Integer courseNumber)
+    public String deleteCourse(Integer id)
     {
-        return "course added successfully";
+        return courseService.deleteCourse(id);
     }
 
 }
